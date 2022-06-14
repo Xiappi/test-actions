@@ -7,9 +7,8 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: xiappi/test-actions@v1.1
+        uses: xiappi/test-actions@main
         with:
-          branch: main
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
       - name: Get the output time
