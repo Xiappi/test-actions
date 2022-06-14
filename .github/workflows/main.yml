@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: ./
+        uses: xiappi/test-actions@master
         with:
           branch: main
           who-to-greet: 'Mona the Octocat'
