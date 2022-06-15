@@ -19,15 +19,17 @@ jobs:
         run: echo "The time was ${{ steps.hello.outputs.time }}"
 
   files:
+    name: check-files
     runs-on: ubuntu-latest
     outputs:
         changedFiles: ${{steps.step1.outputs.files}}
-    name: check-files
     steps:
     - id: step1
       uses: jitterbit/get-changed-files@v1
       with:
         format: 'json'
+
+    - name: step2
       run: |
         mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
         echo "::set-output name=test::added_modified_files"
