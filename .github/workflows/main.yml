@@ -1,7 +1,8 @@
-on: 
-  push
+on: push
   # pull_request:
   #   types: [opened, reopened]
+
+
 
 jobs:
   hello_world_job:
@@ -16,3 +17,17 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+  files:
+    runs-on: ubuntu-latest
+    name: check-files
+    steps:
+    - id: files
+      uses: jitterbit/get-changed-files@v1
+      with:
+        format: 'json'
+    - run: |
+        mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
+        for added_modified_file in ${added_modified_files[@]}; do
+          echo "Do something with this ${added_modified_file}."
+        done
