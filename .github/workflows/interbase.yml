@@ -1,4 +1,3 @@
-on: push
 jobs:
   hello_world_job:
     runs-on: windows-2019
