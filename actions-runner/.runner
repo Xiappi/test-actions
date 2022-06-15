@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 21,
+  "agentName": "interbase-runner",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelines.actions.githubusercontent.com/kgKnBruiyzlfcLuz8SzKbvhWanFfvl2DNr0FabcUPCvNjDiHF1",
+  "gitHubUrl": "https://github.com/Xiappi/test-actions",
+  "workFolder": "action2"
+}
