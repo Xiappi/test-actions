@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
-echo "Hello $1"
-time=$(date)
-echo "::set-output name=time::$time" 
+echo "This is argument 1"
+echo $1
+
 
 
 # #!/bin/bash
