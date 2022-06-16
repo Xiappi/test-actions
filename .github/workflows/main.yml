@@ -31,8 +31,8 @@ jobs:
     - id: step2
       run: |
         mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
-        echo "${{added_modified_files}}"
-        echo "::set-output name=changedFiles::${{added_modified_files}}"
+        echo "$added_modified_files"
+        echo "::set-output name=changedFiles::$added_modified_files"
     
   job3:
     runs-on: ubuntu-latest
