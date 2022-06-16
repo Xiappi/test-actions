@@ -31,7 +31,7 @@ jobs:
     - id: step2
       run: |
         echo "${{ steps.step1.outputs.added_modified }}"
-        echo "::set-output name=changedFiles::$added_modified_files"
+        echo "::set-output name=changedFiles::${{ steps.step1.outputs.added_modified }}"
     
   job3:
     runs-on: ubuntu-latest
