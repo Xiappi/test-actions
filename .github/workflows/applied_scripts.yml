@@ -37,5 +37,5 @@ jobs:
     steps:
       - id: step1
         uses: xiappi/test-actions/actions/applied_scripts_action@main
-        args:
-          - ${{needs.job2.outputs.output1}}
+        with:
+          changed-files: "${{needs.job2.outputs.output1}}"
