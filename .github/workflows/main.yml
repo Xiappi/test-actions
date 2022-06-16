@@ -30,8 +30,7 @@ jobs:
         format: 'json'
     - id: step2
       run: |
-        mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.step1.outputs.added_modified }}')
-        echo "${added_modified_files}"
+        echo "${{ steps.step1.outputs.added_modified }}"
         echo "::set-output name=changedFiles::$added_modified_files"
     
   job3:
