@@ -1,9 +1,9 @@
 #!/bin/sh -l
 
-echo "This is argument 1"
-echo $1
-
-
+for i in $(find . -type f -print0 -name "*.sql")
+do
+    echo code to perform task on each file
+done
 
 # #!/bin/bash
 # filename='test.txt'

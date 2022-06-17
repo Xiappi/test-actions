@@ -32,6 +32,7 @@ jobs:
           echo "::set-output name=changedFiles::${{ steps.step1.outputs.added_modified }}"
 
   job3:
+    name: check-applied-scripts
     runs-on: ubuntu-latest
     needs: job2
     steps:
