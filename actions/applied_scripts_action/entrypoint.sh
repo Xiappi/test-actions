@@ -1,26 +1,41 @@
-#!/bin/sh -l
+#!/bin/bash
 
-for i in $(find . -type f -print0 -name "*.sql")
-do
-    echo code to perform task on each file
-done
 
-# #!/bin/bash
-# filename='test.txt'
-# n=1
 
-# # pass current branch, destination branch
-# # do git diff
-# # process each sql file
 
-# while read line; do
+# search_dir=./scripts
+# for entry in "$search_dir"/*sql
+# do
+#   if [ -f "$entry" ];then
 
-# if [[ "${line^^}" == *"APPLIED_SCRIPTS"* ]]; then
-#     echo "Line No. $n : $line"
-#     read line2
-#     echo $0
-# fi
+#     while read line; do
 
-# n=$((n+1))
-# # reading each line
-# done < $filename
+#     if [[ "${line^^}" == *"APPLIED_SCRIPTS"* ]]; then
+#         echo "Line No. $n : $line"
+#         read line2
+#         echo $0
+#     fi
+
+#     echo "$entry"
+#   fi
+# done
+
+#!/bin/bash
+filename='./scripts/210811DC03.sql'
+n=1
+
+# pass current branch, destination branch
+# do git diff
+# process each sql file
+
+while read line; do
+
+if [[ "${line^^}" == *"APPLIED_SCRIPTS"* ]]; then
+    echo "Line No. $n : $line"
+    read line2
+    echo $0
+fi
+
+n=$((n+1))
+# reading each line
+done < $filename
