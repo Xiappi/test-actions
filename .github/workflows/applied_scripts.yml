@@ -41,10 +41,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            if [[ ${{ steps.step2.outputs.failures }} != 0 ]]; 
+            if [[ ${{ steps.step2.outputs.failures }} != 0 ]] 
             then 
 
-              echo ${{ steps.step2.outputs.failures }}
+                echo ${{ steps.step2.outputs.failures }}
 
                 github.rest.issues.createComment({
                 issue_number: context.issue.number,
