@@ -42,9 +42,11 @@ jobs:
         if: ${{ steps.step2.outputs.failures }} != 0
         with:
           script: |
+
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ steps.step2.outputs.failures }}'
+              body: 'Issues with applied script entries. Please check the following files:\n${{ steps.step2.outputs.failures }}'
             })
