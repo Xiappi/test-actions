@@ -52,4 +52,4 @@ drop procedure temp_210929DC01^
 set term ;^
 
 insert into applied_scripts (name, description, script_date)
-     values ('210929DC032', 'MHM-1079 add rules for HX reports', '2021-Sept-29');
+     values ('210929DC01', 'MHM-1079 add rules for HX reports', '2021-Sept-29');

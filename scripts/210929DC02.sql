@@ -105,4 +105,4 @@ drop procedure temp_add_custom_rule_with_notify^
 set term ;^
 
 insert into applied_scripts (name, description, script_date)
-     values ('210929DC3', 'MHM-151 add rule for motor prequal', '2021-Sep-29');
+     values ('210929DC02', 'MHM-151 add rule for motor prequal', '2021-Sep-29');
