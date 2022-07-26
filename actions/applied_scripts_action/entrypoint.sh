@@ -1,65 +1,72 @@
 #!/bin/bash
 
-search_dir=./scripts
-reg_expr="^[\d]{6}\w{2}\d{2}.sql$"
-for entry in "$search_dir"/*sql;
+# search_dir="../ais8/DatabaseScripts"
+# search_dir="./Scripts"
+echo $1
+
+exit 0
+
+file_reg_expr=[0-9]{5,6}[a-zA-Z]{2,3}[0-9]{1,2}
+insert_reg_expr=[0-9]{5,6}[a-zA-Z]{2,3}[0-9]{1,2}[\'\"]
+
+failures=()
+count=0
+for entry in  `find $search_dir -type f -name "*.sql" -o`;
 do
+    fileIsValid=0
     # check for file
     if [ -f "$entry" ];
     then
         check=0
+
+        # capture applied script filename 
+        if [[ $entry =~ $file_reg_expr ]] 
+        then
+            fileName="${BASH_REMATCH[0]}"
+        else
+            # only processe numbered scripts
+            continue
+        fi
 
         # read line
         while read line;
         do
             
             # check for applied script statement
-            if [[ "${line^^}" == *"APPLIED_SCRIPTS"* ]]; then
+            if [[ "${line^^}" == *"INSERT INTO APPLIED_SCRIPTS"* ]]; 
+            then
                 
-                if [[ $line =~ $reg_expr ]]
+                # grab next line, formatter should put it on the next line
+                read line2
+
+                # capture insert into applied scripts filename, also check the actual insert line to handle cheeky one liners
+                if [[ ${line2^^} =~ ${insert_reg_expr^^} || ${line^^} =~ ${insert_reg_expr^^} ]]
                 then
-                    echo $BASH_REMATCH
+
+                    # grab value, and remove trailing quotation
+                   applied_entry="${BASH_REMATCH[0]}" 
+                   applied_entry=${applied_entry::-1}
+                    # compare, we just need one applied scripts entry to match filename so use a flag
+                    if [ ${fileName^^} == ${applied_entry^^} ]
+                    then
+                        fileIsValid=1
+                        break
+                    fi
                 fi
 
-
-                # check next 3 lines for file name
-                # for i in {1..3}
-                # do
-                #     read 
-
-                # done
-                
-                # echo $line
-                # read line2
-                # echo $line2
-                # echo $entry
-                check=1
             fi
         done <$entry
-        
-        if [ $check -eq 0 ]; then
-            
-            echo $entry
+
+        if [ $fileIsValid -ne 1 ]
+        then
+            failures+=( $entry )
         fi
+        
     fi
 done
 
-#!/bin/bash
-filename='./scripts/210811DC03.sql'
-n=1
-
-# pass current branch, destination branch
-# do git diff
-# process each sql file
-
-# while read line; do
-
-# if [[ "${line^^}" == *"APPLIED_SCRIPTS"* ]]; then
-#     echo "Line No. $n : $line"
-#     read line2
-#     echo $0
-# fi
-
-# n=$((n+1))
-# # reading each line
-# done < $filename
+if [ ${#failures[@]} -ne 0 ]
+then
+    echo ${failures[*]}
+    exit 1
+fi
