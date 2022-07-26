@@ -29,6 +29,4 @@ jobs:
       - name: Run applied scripts check
         shell: bash
         # uses: xiappi/test-actions/actions/applied_scripts_action@main
-        run: |
-          chmod +x ./entrypoint.sh
-          ./entrypoint.sh "${{needs.job2.outputs.output1}}"
+        run: .github/workflows/entrypoint.sh "${{needs.job2.outputs.output1}}"
