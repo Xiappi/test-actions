@@ -38,5 +38,5 @@ set term;!
 commit;
 
 insert into applied_scripts (name, description, script_date)
-     values ("210909ZD01", "MHM-998 Correct HX dwell order", "2021-SEP-09");
+     values ("210909ZD02", "MHM-998 Correct HX dwell order", "2021-SEP-09");
 commit work;
