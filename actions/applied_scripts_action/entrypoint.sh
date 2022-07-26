@@ -12,7 +12,8 @@ count=0
 
 # TODO: loop through changed files
 
-for entry in  `find $search_dir -type f -name "*.sql" -o`;
+# for entry in  `find $search_dir -type f -name "*.sql" -o`;
+for entry in $changedFiles;
 do
     fileIsValid=0
     # check for file
