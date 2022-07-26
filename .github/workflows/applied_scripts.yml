@@ -42,6 +42,7 @@ jobs:
         if: ${{ steps.step2.outputs.failures }} != 0
         with:
           script: |
+            echo ${{ steps.step2.outputs.failures }} != 0
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
