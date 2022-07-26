@@ -67,7 +67,12 @@ done
 
 if [ ${#failures[@]} -ne 0 ]
 then
-    echo ::set-output name=failures::"${failures[*]}"
+    result=""
+    for failure in ${failures[@]}
+    do
+        result+="$failure\n"
+    done
+    echo ::set-output name=failures::"$result"
 else
     echo ::set-output name=failures::"0"
 fi
