@@ -39,18 +39,13 @@ jobs:
       - id: step3
         name: Handle failure
         uses: actions/github-script@v6
+        if: ${{ steps.step2.outputs.failures }} != 0
         with:
           script: |
-            if [ ${{ steps.step2.outputs.failures }} != 0 ]
-            then 
-
-                echo ${{ steps.step2.outputs.failures }}
-
-                github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: 'Issue with applied scripts entry!\nFailures: ${{ steps.step2.outputs.failures }}'
-              })
-              exit 1; 
-            fi
+            github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Issue with applied scripts entry!\nFailures: ${{ steps.step2.outputs.failures }}'
+            })
+            exit 1;
