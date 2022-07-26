@@ -39,7 +39,7 @@ jobs:
       - id: step3
         name: Handle failure
         uses: actions/github-script@v6
-        if: ${{ steps.step2.outputs.failures }} != "0"
+        if: ${{ steps.step2.outputs.failures != 0 }}
         with:
           script: |
             github.rest.issues.createComment({
