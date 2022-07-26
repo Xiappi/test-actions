@@ -1,3 +1,3 @@
-#!/bin/sh -l
-echo "changed files: $1"
+#!/bin/bash
+echo "changed files"
 exit 0
