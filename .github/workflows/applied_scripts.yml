@@ -42,4 +42,4 @@ jobs:
           changed-files: "${{needs.job2.outputs.output1}}"
       - id: step2
         run: |
-          if [[ ${{ steps.step1.conclusion }} == "success" ]]; then exit 0; else exit 1; fi
+          if [[ ${{ steps.step1.conclusion }} == "success" ]] then exit 0; else exit 1; fi
