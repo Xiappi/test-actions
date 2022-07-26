@@ -170,4 +170,4 @@ commit work^
 set term ;^
 
 insert into applied_scripts (name, description, script_date)
-     values ('200918ML02', 'RT-161 - auth level for glass coverage', '2020-Sept-18');
+     values ('200918ML01', 'RT-161 - auth level for glass coverage', '2020-Sept-18');
