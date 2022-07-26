@@ -22,13 +22,30 @@ jobs:
     name: check-applied-scripts
     runs-on: ubuntu-latest
     needs: job2
+
     steps:
-      - name: Checkout
+      - id: step1 
+        name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run applied scripts check
+      - id: step2
+        name: Run applied scripts check
         shell: bash
+        
         # uses: xiappi/test-actions/actions/applied_scripts_action@main
         run: |
           chmod +x .github/workflows/entrypoint.sh
           .github/workflows/entrypoint.sh "${{needs.job2.outputs.output1}}"
+
+      - name: Handle failure
+        run: |
+          if [[ ${{ steps.step2.outputs.failures }} == 0 ]]; 
+          then 
+          echo "No Failures"
+          exit 0; 
+          else 
+            echo ${{ steps.step2.outputs.failures }}
+          exit 1;
+           fi
+
+
