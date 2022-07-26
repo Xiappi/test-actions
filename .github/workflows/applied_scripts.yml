@@ -41,7 +41,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            if [[ ${{ steps.step2.outputs.failures }} != 0 ]] 
+            if [ ${{ steps.step2.outputs.failures }} != 0 ]
             then 
 
                 echo ${{ steps.step2.outputs.failures }}
