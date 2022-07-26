@@ -1,6 +1,6 @@
-on: push
-# pull_request:
-#   types: [opened, reopened]
+on:
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   job2:
@@ -24,28 +24,34 @@ jobs:
     needs: job2
 
     steps:
-      - id: step1 
+      - id: step1
         name: Checkout
         uses: actions/checkout@v3
 
       - id: step2
         name: Run applied scripts check
         shell: bash
-        
+
         # uses: xiappi/test-actions/actions/applied_scripts_action@main
         run: |
           chmod +x .github/workflows/entrypoint.sh
           .github/workflows/entrypoint.sh "${{needs.job2.outputs.output1}}"
 
-      - name: Handle failure
-        run: |
-          if [[ ${{ steps.step2.outputs.failures }} == 0 ]]; 
-          then 
-          echo "No Failures"
-          exit 0; 
-          else 
-            echo ${{ steps.step2.outputs.failures }}
-          exit 1;
-           fi
+      - id: step3
+        name: Handle failure
+        uses: actions/github-script@v6
+        with:
+          script: |
+            if [[ ${{ steps.step2.outputs.failures }} != 0 ]]; 
+            then 
 
+              echo ${{ steps.step2.outputs.failures }}
 
+                github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: 'Issue with applied scripts entry!\nFailures: ${{ steps.step2.outputs.failures }}'
+              })
+              exit 1; 
+            fi
