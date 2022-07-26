@@ -68,9 +68,6 @@ done
 if [ ${#failures[@]} -ne 0 ]
 then
     echo ::set-output name=failures::"${failures[*]}"
-    exit 1
-
 else
     echo ::set-output name=failures::"0"
-    exit 0
 fi
