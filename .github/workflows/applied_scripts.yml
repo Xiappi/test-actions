@@ -39,7 +39,7 @@ jobs:
 
       - name: Handle failure
         run: |
-          if [[ ${{ steps.step2.outputs.failures }} ]]; 
+          if [[ ${{ steps.step2.outputs.failures == 0 }} ]]; 
           then 
           echo "No Failures"
           exit 0; 
