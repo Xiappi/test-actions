@@ -15,6 +15,7 @@ count=0
 # for entry in  `find $search_dir -type f -name "*.sql" -o`;
 for entry in $changedFiles;
 do
+    echo $entry
     fileIsValid=0
     # check for file
     if [ -f "$entry" ];
